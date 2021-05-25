@@ -1,0 +1,8 @@
+<library path="rrbot_controller">
+  <class name="rrbot_controller/RRBotController"
+         type="rrbot_controller::RRBotController" base_class_type="controller_interface::ControllerInterface">
+  <description>
+    RRBotController ros2_control controller.
+  </description>
+  </class>
+</library>
