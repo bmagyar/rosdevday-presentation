@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "rrbot_controller/rrbot_controller.hpp"
+
 #include <limits>
 #include <string>
 #include <vector>
-
-#include "rrbot_controller/rrbot_controller.hpp"
 
 namespace rrbot_controller
 {
