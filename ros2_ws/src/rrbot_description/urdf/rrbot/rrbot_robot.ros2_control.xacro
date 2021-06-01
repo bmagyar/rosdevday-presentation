@@ -11,7 +11,7 @@
           <param name="state_following_offset">0.0</param>
         </xacro:if>
         <xacro:unless value="${use_fake_hardware}">
-          <plugin>ros2_control_demo_hardware/RRBotHardwareInterface</plugin>
+          <plugin>rrbot_hardware_interface/RRBotHardwareInterface</plugin>
         </xacro:unless>
       </hardware>
       <joint name="joint1">

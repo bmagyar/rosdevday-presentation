@@ -71,7 +71,7 @@ hardware_interface::return_type RRBotHardwareInterface::start()
 
   // in this simple example reset state to initial positions
   for (size_t i = 0; i < info_.joints.size(); ++i){
-    hw_states_[i] = stod(info_.joints[i].parameters["initial_position"]);
+    hw_states_[i] = 0.0; // INITIAL POSITION is ZERO
     hw_commands_[i] = hw_states_[i];
   }
 
