@@ -33,7 +33,7 @@ class RRBotHardwareInterface
   : public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
 {
 public:
-  RCLCPP_SHARED_PTR_DEFINITIONS(RRBotHardwareInterface);
+  RCLCPP_SHARED_PTR_DEFINITIONS(RRBotHardwareInterface)
 
   RRBOT_HARDWARE_INTERFACE_PUBLIC
   hardware_interface::return_type configure(const hardware_interface::HardwareInfo & info) override;
