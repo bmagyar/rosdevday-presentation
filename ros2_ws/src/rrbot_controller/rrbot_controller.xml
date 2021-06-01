@@ -6,3 +6,12 @@
   </description>
   </class>
 </library>
+
+<library path="rrbot_controller_array">
+  <class name="rrbot_controller/RRBotControllerArray"
+         type="rrbot_controller::RRBotControllerArray" base_class_type="controller_interface::ControllerInterface">
+  <description>
+    RRBotControllerArray ros2_control controller.
+  </description>
+  </class>
+</library>

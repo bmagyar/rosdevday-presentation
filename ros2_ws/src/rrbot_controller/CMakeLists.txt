@@ -24,6 +24,7 @@ find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
 find_package(realtime_tools REQUIRED)
+find_package(example_interfaces REQUIRED)
 
 add_library(
   rrbot_controller
@@ -49,12 +50,37 @@ ament_target_dependencies(
 # prevent pluginlib from using boost
 target_compile_definitions(rrbot_controller PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
 
+add_library(
+  rrbot_controller_array
+  SHARED
+  src/rrbot_controller_array.cpp
+)
+target_include_directories(
+  rrbot_controller_array
+  PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(rrbot_controller_array
+  control_msgs
+  controller_interface
+  example_interfaces
+  hardware_interface
+  pluginlib
+  rclcpp
+  rclcpp_lifecycle
+  realtime_tools
+)
+# prevent pluginlib from using boost
+target_compile_definitions(rrbot_controller_array PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
+
+
 pluginlib_export_plugin_description_file(
   controller_interface rrbot_controller.xml)
 
 install(
   TARGETS
-  rrbot_controller
+  rrbot_controller rrbot_controller_array
   RUNTIME DESTINATION bin
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
@@ -66,13 +92,6 @@ install(
 )
 
 if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # uncomment the line when a copyright and license is not present in all source files
-  #set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # uncomment the line when this package is not in a git repo
-  #set(ament_cmake_cpplint_FOUND TRUE)
   find_package(ament_cmake_gmock REQUIRED)
   find_package(controller_manager REQUIRED)
   find_package(hardware_interface REQUIRED)
