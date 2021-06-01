@@ -40,7 +40,7 @@ hardware_interface::return_type RRBotHardwareInterface::configure(
 std::vector<hardware_interface::StateInterface> RRBotHardwareInterface::export_state_interfaces()
 {
   std::vector<hardware_interface::StateInterface> state_interfaces;
-  for (uint i = 0; i < info_.joints.size(); i++) {
+  for (size_t i = 0; i < info_.joints.size(); ++i){
     state_interfaces.emplace_back(
       hardware_interface::StateInterface(
         // TODO(anyone): insert correct interfaces
@@ -54,7 +54,7 @@ std::vector<hardware_interface::CommandInterface>
 RRBotHardwareInterface::export_command_interfaces()
 {
   std::vector<hardware_interface::CommandInterface> command_interfaces;
-  for (uint i = 0; i < info_.joints.size(); i++) {
+  for (size_t i = 0; i < info_.joints.size(); ++i){
     command_interfaces.emplace_back(
       hardware_interface::CommandInterface(
         // TODO(anyone): insert correct interfaces
@@ -70,7 +70,7 @@ hardware_interface::return_type RRBotHardwareInterface::start()
   RCLCPP_INFO(rclcpp::get_logger("RrbotHardwareInterface"), "Starting...");
 
   // in this simple example reset state to initial positions
-  for (auto i = 0u; info_.joints.size(); ++i) {
+  for (size_t i = 0; i < info_.joints.size(); ++i){
     hw_states_[i] = stod(info_.joints[i].parameters["initial_position"]);
     hw_commands_[i] = hw_states_[i];
   }
@@ -96,7 +96,7 @@ hardware_interface::return_type RRBotHardwareInterface::read()
   RCLCPP_INFO(rclcpp::get_logger("RRBotHardwareInterface"), "Reading...");
 
   // write command to hardware, in this example do mirror command to states
-  for (auto i = 0u; hw_states_.size(); ++i) {
+  for (size_t i = 0; i < hw_states_.size(); ++i){
     RCLCPP_INFO(
       rclcpp::get_logger("RRBotHardwareInterface"),
       "Got state %.2f for joint %d!", hw_states_[i], i);
@@ -108,8 +108,8 @@ hardware_interface::return_type RRBotHardwareInterface::read()
 hardware_interface::return_type RRBotHardwareInterface::write()
 {
   // write command to hardware, in this example do mirror command to states
-  for (auto i = 0u; hw_commands_.size(); ++i) {
-    hw_commands_[i] = hw_states_[i];
+  for (size_t i = 0; i < hw_commands_.size(); ++i){
+    hw_states_[i] = hw_commands_[i];
   }
 
   return hardware_interface::return_type::OK;
