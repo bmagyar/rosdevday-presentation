@@ -1,0 +1,9 @@
+<library path="rrbot_hardware_interface">
+  <class name="rrbot_hardware_interface/RRBotHardwareInterface"
+         type="rrbot_hardware_interface::RRBotHardwareInterface"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      ros2_control hardware interface.
+    </description>
+  </class>
+</library>
