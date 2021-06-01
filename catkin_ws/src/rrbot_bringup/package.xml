@@ -10,6 +10,9 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
+  <depend>controller_manager</depend>
+  <depend>hardware_interface</depend>
+  <depend>roscpp</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
