@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>rrbot_hardware_interface</name>
+  <version>0.0.1</version>
+  <description>Hardware Interface for ros2_control for exemplary RBot robot.</description>
+
+  <maintainer email="bence.magyar.robotics@gmail.com">Bence Magyar</maintainer>
+  <maintainer email="denis@stogl.de">Denis Štogl</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>controller_manager</depend>
+  <depend>hardware_interface</depend>
+  <depend>roscpp</depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>
