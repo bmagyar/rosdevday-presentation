@@ -109,7 +109,7 @@ hardware_interface::return_type RRBotHardwareInterface::write()
 {
   // write command to hardware, in this example do mirror command to states
   for (size_t i = 0; i < hw_commands_.size(); ++i){
-    hw_states_[i] = hw_states_[i] + (hw_commands_[i] - hw_states_[i]) / 3.0;
+    hw_states_[i] = hw_states_[i] + (hw_commands_[i] - hw_states_[i]) / 100.0;
   }
 
   return hardware_interface::return_type::OK;

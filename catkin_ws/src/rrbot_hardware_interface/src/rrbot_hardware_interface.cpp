@@ -86,7 +86,7 @@ bool RRBotHardwareInterface::write(const ros::Time time, const ros::Duration per
   // write command to hardware, in this example do mirror command to states
   for (size_t i = 0; i < hw_position_commands_.size(); ++i) {
     hw_position_states_[i] = hw_position_states_[i] +
-                             (hw_position_commands_[i] - hw_position_states_[i]) / 3.0;
+                             (hw_position_commands_[i] - hw_position_states_[i]) / 100.0;
   }
 
   return true;
