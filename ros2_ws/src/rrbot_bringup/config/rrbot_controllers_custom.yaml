@@ -3,7 +3,7 @@ controller_manager:
     update_rate: 100  # Hz
 
     joint_state_broadcaster:
-      type: joint_state_broadcaster/JointStateBroadcaster
+      type: joint_state_controller/JointStateController
 
     rrbot_controller:
       type: rrbot_controller/RRBotController
