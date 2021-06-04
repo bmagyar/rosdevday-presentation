@@ -1,0 +1,17 @@
+<!--<library path="rrbot_controller">
+  <class name="rrbot_controller/RRBotController"
+  type="rrbot_controller::RRBotController" base_class_type="controller_interface::ControllerBase">
+    <description>
+      RRBotController ros_control controller.
+    </description>
+  </class>
+</library>-->
+
+<library path="rrbot_controller_array">
+  <class name="rrbot_controller/RRBotControllerArray"
+         type="rrbot_controller::RRBotControllerArray" base_class_type="controller_interface::ControllerBase">
+    <description>
+      RRBotControllerArray ros_control controller.
+    </description>
+  </class>
+</library>
