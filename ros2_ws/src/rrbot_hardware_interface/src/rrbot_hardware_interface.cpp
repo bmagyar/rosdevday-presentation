@@ -67,7 +67,7 @@ RRBotHardwareInterface::export_command_interfaces()
 hardware_interface::return_type RRBotHardwareInterface::start()
 {
   // stat execution on hardware
-  RCLCPP_INFO(rclcpp::get_logger("RrbotHardwareInterface"), "Starting...");
+  RCLCPP_INFO(rclcpp::get_logger("RRBotHardwareInterface"), "Starting...");
 
   // in this simple example reset state to initial positions
   for (size_t i = 0; i < info_.joints.size(); ++i){
@@ -109,7 +109,7 @@ hardware_interface::return_type RRBotHardwareInterface::write()
 {
   // write command to hardware, in this example do mirror command to states
   for (size_t i = 0; i < hw_commands_.size(); ++i){
-    hw_states_[i] = hw_commands_[i];
+    hw_states_[i] = hw_states_[i] + (hw_commands_[i] - hw_states_[i]) / 3.0;
   }
 
   return hardware_interface::return_type::OK;

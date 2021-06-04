@@ -35,7 +35,9 @@
   </node>
 
   <!-- Load controllers -->
-  <!--<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
-      args="joint_state_controller $(arg controller_to_spawn)"/>-->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+      args="joint_state_controller $(arg controller_to_spawn)"/>
+
+  <node name="view_rrbot" pkg="rviz" type="rviz" args="-d $(find rrbot_description)/rviz/rrbot.rviz" />
 
 </launch>
