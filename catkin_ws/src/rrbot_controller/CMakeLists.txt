@@ -32,6 +32,13 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+add_library(${PROJECT_NAME}
+  src/rrbot_controller.cpp
+)
+target_link_libraries(${PROJECT_NAME}
+  ${catkin_LIBRARIES}
+)
+
 add_library(${PROJECT_NAME}_array
   src/rrbot_controller_array.cpp
 )
@@ -49,7 +56,7 @@ install(DIRECTORY include/${PROJECT_NAME}/
 )
 
 # Install targets
-install(TARGETS ${PROJECT_NAME}_array
+install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_array
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}

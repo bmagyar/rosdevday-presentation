@@ -25,7 +25,6 @@
 #include "realtime_tools/realtime_buffer.h"
 #include "realtime_tools/realtime_publisher.h"
 
-// TODO(anyone): Replace with controller specific messages
 #include "control_msgs/msg/joint_controller_state.hpp"
 #include "control_msgs/msg/joint_jog.hpp"
 
@@ -64,7 +63,6 @@ protected:
   std::vector<std::string> joint_names_;
   std::string interface_name_;
 
-  // TODO(anyone): replace the state and command message types
   // Command subscribers and Controller State publisher
   using ControllerCommandMsg = control_msgs::msg::JointJog;
 
