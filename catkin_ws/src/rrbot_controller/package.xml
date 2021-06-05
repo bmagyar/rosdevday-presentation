@@ -20,6 +20,5 @@
 
   <export>
     <controller_interface plugin="${prefix}/rrbot_controller.xml"/>
-
   </export>
 </package>

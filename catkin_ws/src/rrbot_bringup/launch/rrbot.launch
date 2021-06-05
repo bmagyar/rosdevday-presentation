@@ -18,16 +18,17 @@
 <launch>
 
   <arg name="controller_to_spawn" default="forward_position_controller" />
+  <arg name="controllers_yaml" default="rrbot_controllers" />
 
   <param name="robot_description" command="$(find xacro)/xacro '$(find rrbot_description)/urdf/rrbot_robot.urdf.xacro'" />
 
-  <node name="rrbot_hardware_interface" pkg="rrbot_hardware_interface" type="node">
+  <node name="rrbot_hardware_interface" pkg="rrbot_hardware_interface" type="rrbot_hardware_interface_node">
     <!-- Load standard controller joint names from YAML file to parameter server -->
     <rosparam command="load" file="$(find rrbot_bringup)/config/joint_names.yaml" />
   </node>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam command="load" file="$(find rrbot_bringup)/config/rrbot_controllers.yaml" />
+  <rosparam command="load" file="$(find rrbot_bringup)/config/$(arg controllers_yaml).yaml" />
 
   <!-- Load robot state publisher -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">

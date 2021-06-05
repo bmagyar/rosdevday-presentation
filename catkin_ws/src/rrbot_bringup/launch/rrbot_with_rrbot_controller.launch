@@ -18,27 +18,11 @@
 <launch>
 
   <arg name="controller_to_spawn" default="rrbot_controller" />
+  <arg name="controllers_yaml" default="rrbot_controllers_custom" />
 
-  <param name="robot_description" command="$(find xacro)/xacro '$(find rrbot_description)/urdf/rrbot_robot.urdf.xacro'" />
-
-  <!-- Load standard controller joint names from YAML file to parameter server -->
-  <rosparam command="load" file="$(find rrbot_bringup)/config/joint_names.yaml" />
-
-  <node name="rrbot_hardware_interface" pkg="rrbot_hardware_interface" type="rrbot_hardware_interface_node">
-  </node>
-
-  <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam command="load" file="$(find rrbot_bringup)/config/rrbot_controllers_custom.yaml" />
-
-  <!-- Load robot state publisher -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
-    <param name="ignore_timestamp" type="bool" value="true"/>
-  </node>
-
-  <!-- Load controllers -->
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
-      args="joint_state_controller $(arg controller_to_spawn)"/>
-
-  <node name="visualize_robot" pkg="rviz" type="rviz" args="-d $(find rrbot_description)/rviz/rrbot.rviz" />
+  <include file="$(find rrbot_bringup)/launch/rrbot.launch" >
+    <arg name="controller_to_spawn" value="$(arg controller_to_spawn)" />
+    <arg name="controllers_yaml" value="$(arg controllers_yaml)" />
+  </include>
 
 </launch>

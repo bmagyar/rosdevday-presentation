@@ -21,6 +21,7 @@
 #include <hardware_interface/joint_command_interface.h>
 #include <controller_interface/controller.h>
 #include <realtime_tools/realtime_buffer.h>
+#include <realtime_tools/realtime_publisher.h>
 #include <ros/node_handle.h>
 
 #include <control_msgs/JointControllerState.h>
@@ -49,8 +50,10 @@ protected:
   void commandCB(const ControllerCommandMsg::ConstPtr & msg);
 
   using ControllerStateMsg = control_msgs::JointControllerState;
-//   using ControllerStatePublisher = realtime_tools::RealtimePublisher<ControllerStateMsg>;
+  using ControllerStatePublisher = realtime_tools::RealtimePublisher<ControllerStateMsg>;
 
+  ros::Publisher::SharedPtr s_publisher_;
+  std::unique_ptr<ControllerStatePublisher> state_publisher_;
 };
 
 }  // namespace rrbot_controller

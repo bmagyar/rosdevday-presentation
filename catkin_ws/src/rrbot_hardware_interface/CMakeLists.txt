@@ -43,7 +43,6 @@ target_link_libraries(${PROJECT_NAME}
 add_executable(${PROJECT_NAME}_node
   src/rrbot_hardware_interface_node.cpp
 )
-set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
 add_dependencies(${PROJECT_NAME}_node
   ${catkin_EXPORTED_TARGETS}
 )

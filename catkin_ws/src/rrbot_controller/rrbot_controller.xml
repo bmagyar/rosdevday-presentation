@@ -7,7 +7,7 @@
   </class>
 </library>-->
 
-<library path="rrbot_controller_array">
+<library path="librrbot_controller_array">
   <class name="rrbot_controller/RRBotControllerArray"
          type="rrbot_controller::RRBotControllerArray" base_class_type="controller_interface::ControllerBase">
     <description>
