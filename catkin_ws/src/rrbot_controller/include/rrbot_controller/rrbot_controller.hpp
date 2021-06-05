@@ -29,31 +29,31 @@
 
 namespace rrbot_controller
 {
-  class RRBotController :
-  public controller_interface::Controller<hardware_interface::PositionJointInterface>
-  {
-  public:
-    bool init(hardware_interface::PositionJointInterface * hw, ros::NodeHandle & nh);
+class RRBotController :
+public controller_interface::Controller<hardware_interface::PositionJointInterface>
+{
+public:
+  bool init(hardware_interface::PositionJointInterface * hw, ros::NodeHandle & nh);
 
-    void starting(const ros::Time & time);
+  void starting(const ros::Time & time);
 
-    void update(const ros::Time & time, const ros::Duration & period);
+  void update(const ros::Time & time, const ros::Duration & period);
 
-  protected:
-    std::vector<std::string> joint_names_;
-    std::vector< hardware_interface::JointHandle > joints_;
-    realtime_tools::RealtimeBuffer<std::vector<double> > commands_buffer_;
+protected:
+  std::vector<std::string> joint_names_;
+  std::vector< hardware_interface::JointHandle > joints_;
+  realtime_tools::RealtimeBuffer<std::vector<double> > commands_buffer_;
 
-    using ControllerCommandMsg = control_msgs::JointJog;
+  using ControllerCommandMsg = control_msgs::JointJog;
 
-    ros::Subscriber command_subscriber_;
-    void commandCB(const ControllerCommandMsg::ConstPtr & msg);
+  ros::Subscriber command_subscriber_;
+  void commandCB(const ControllerCommandMsg::ConstPtr & msg);
 
-    using ControllerStateMsg = control_msgs::JointControllerState;
-    using ControllerStatePublisher = realtime_tools::RealtimePublisher<ControllerStateMsg>;
+  using ControllerStateMsg = control_msgs::JointControllerState;
+  using ControllerStatePublisher = realtime_tools::RealtimePublisher<ControllerStateMsg>;
 
-    std::unique_ptr<ControllerStatePublisher> state_publisher_;
-  };
+  std::unique_ptr<ControllerStatePublisher> state_publisher_;
+};
 
 }  // namespace rrbot_controller
 
