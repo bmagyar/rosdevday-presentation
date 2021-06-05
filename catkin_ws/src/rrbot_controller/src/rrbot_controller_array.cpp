@@ -23,13 +23,14 @@ bool RRBotControllerArray::init(hardware_interface::PositionJointInterface * hw,
   std::string param_name = "joints";
   if(!nh.getParam(param_name, joint_names_))
   {
-    ROS_ERROR_STREAM("Failed to getParam '" << param_name << "' (namespace: " << nh.getNamespace() << ").");
+    ROS_ERROR_STREAM_NAMED("RRBotControllerArray",
+      "Failed to getParam '" << param_name <<"' (namespace: " << nh.getNamespace() << ").");
     return false;
   }
   size_t num_joints = joint_names_.size();
 
   if (num_joints == 0) {
-    ROS_ERROR_STREAM("List of joint names is empty.");
+    ROS_ERROR_STREAM_NAMED("RRBotControllerArray", "List of joint names is empty.");
     return false;
   }
   for(size_t i = 0; i<num_joints; ++i)
@@ -40,10 +41,17 @@ bool RRBotControllerArray::init(hardware_interface::PositionJointInterface * hw,
     }
     catch (const hardware_interface::HardwareInterfaceException& e)
     {
-      ROS_ERROR_STREAM("Exception thrown: " << e.what());
+      ROS_ERROR_STREAM_NAMED("RRBotControllerArray", "Exception thrown: " << e.what());
       return false;
     }
   }
+
+  // State publisher
+  state_publisher_.reset(new ControllerStatePublisher(nh, "state", 1));
+
+  state_publisher_->lock();
+  state_publisher_->msg_.header.frame_id = joint_names_[0];
+  state_publisher_->unlock();
 
   commands_buffer_.writeFromNonRT(std::vector<double>(num_joints, 0.0));
 
@@ -55,9 +63,9 @@ void RRBotControllerArray::starting(const ros::Time & /*time*/)
 {
   // Start controller with current joint positions
   std::vector<double> & commands = *commands_buffer_.readFromRT();
-  for(size_t i = 0; i< joint_names_.size(); ++i)
+  for(size_t i = 0; i < joint_names_.size(); ++i)
   {
-    commands[i]=joints_[i].getPosition();
+    commands[i] = joints_[i].getPosition();
   }
 }
 
@@ -67,13 +75,22 @@ void RRBotControllerArray::update(const ros::Time & /*time*/, const ros::Duratio
   for(size_t i = 0; i < joint_names_.size(); ++i) {
     joints_[i].setCommand(commands[i]);
   }
+
+  if (state_publisher_ && state_publisher_->trylock()) {
+    state_publisher_->msg_.header.stamp = ros::Time::now();
+    state_publisher_->msg_.set_point = joints_[0].getPosition();
+
+    state_publisher_->unlockAndPublish();
+  }
 }
 
 void RRBotControllerArray::commandCB(const ControllerCommandMsg::ConstPtr & msg)
 {
   if (msg->data.size() != joint_names_.size())
   {
-//     ROS_ERROR_STREAM("Dimension of command (" << msg->data.size() << ") does not match number of joints (" << joint_names_.size() << ")! Not executing!");
+    ROS_ERROR_STREAM_NAMED("RRBotControllerArray",
+      "Dimension of command (" << msg->data.size() << ") does not match number of joints ("
+      << joint_names_.size() << ")! Not executing!");
     return;
   }
   commands_buffer_.writeFromNonRT(msg->data);

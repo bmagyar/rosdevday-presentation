@@ -52,7 +52,6 @@ protected:
   using ControllerStateMsg = control_msgs::JointControllerState;
   using ControllerStatePublisher = realtime_tools::RealtimePublisher<ControllerStateMsg>;
 
-  ros::Publisher::SharedPtr s_publisher_;
   std::unique_ptr<ControllerStatePublisher> state_publisher_;
 };
 
