@@ -26,7 +26,7 @@
 #include "ros/node_handle.h"
 
 #include "control_msgs/JointControllerState.h"
-#include "control_msgs/JointJog.h"
+#include "std_msgs/Float64MultiArray.h"
 
 namespace rrbot_controller
 {
