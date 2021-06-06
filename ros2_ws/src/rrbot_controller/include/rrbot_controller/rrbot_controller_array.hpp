@@ -12,20 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef RRBOT_CONTROLLER__RRBOT_CONTROLLER_HPP_
-#define RRBOT_CONTROLLER__RRBOT_CONTROLLER_HPP_
+#ifndef RRBOT_CONTROLLER__RRBOT_CONTROLLER_ARRAY_HPP_
+#define RRBOT_CONTROLLER__RRBOT_CONTROLLER_ARRAY_HPP_
 
+#include <memory>
 #include <string>
 #include <vector>
 
-#include "rrbot_controller/visibility_control.h"
 #include "controller_interface/controller_interface.hpp"
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 #include "rclcpp_lifecycle/state.hpp"
 #include "realtime_tools/realtime_buffer.h"
 #include "realtime_tools/realtime_publisher.h"
+#include "rrbot_controller/visibility_control.h"
 
-// TODO(anyone): Replace with controller specific messages
 #include "control_msgs/msg/joint_controller_state.hpp"
 #include "example_interfaces/msg/float64_multi_array.hpp"
 
@@ -75,4 +75,4 @@ protected:
 
 }  // namespace rrbot_controller
 
-#endif  // RRBOT_CONTROLLER__RRBOT_CONTROLLER_HPP_
+#endif  // RRBOT_CONTROLLER__RRBOT_CONTROLLER_ARRAY_HPP_

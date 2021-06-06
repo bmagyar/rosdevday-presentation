@@ -45,14 +45,16 @@ int main(int argc, char** argv)
   {
     // Receive current state from robot
     if (!rrbot_hardware_interface.read(timestamp, period)) {
-      ROS_FATAL_NAMED("rrbot_hardware_interface", "Failed to read state from robot. Shutting down!");
+      ROS_FATAL_NAMED("rrbot_hardware_interface",
+                      "Failed to read state from robot. Shutting down!");
       ros::shutdown();
     }
 
     // Get current time and elapsed time since last read
     timestamp = ros::Time::now();
     stopwatch_now = std::chrono::steady_clock::now();
-    period.fromSec(std::chrono::duration_cast<std::chrono::duration<double>>(stopwatch_now - stopwatch_last).count());
+    period.fromSec(std::chrono::duration_cast<std::chrono::duration<double>>(
+      stopwatch_now - stopwatch_last).count());
     stopwatch_last = stopwatch_now;
 
 

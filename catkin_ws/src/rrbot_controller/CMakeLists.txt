@@ -19,9 +19,9 @@ find_package(catkin REQUIRED COMPONENTS
 
 # Declare catkin package
 catkin_package(
- INCLUDE_DIRS include
- LIBRARIES ${PROJECT_NAME} ${PROJECT_NAME}_array
- CATKIN_DEPENDS control_msgs controller_interface hardware_interface pluginlib realtime_tools roscpp std_msgs
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME} ${PROJECT_NAME}_array
+  CATKIN_DEPENDS control_msgs controller_interface hardware_interface pluginlib realtime_tools roscpp std_msgs
 )
 
 ###########

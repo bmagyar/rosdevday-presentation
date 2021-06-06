@@ -12,9 +12,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## catkin specific configuration ##
 ###################################
 catkin_package(
- INCLUDE_DIRS include
- LIBRARIES rrbot_hardware_interface
- CATKIN_DEPENDS controller_manager hardware_interface
+  INCLUDE_DIRS include
+  LIBRARIES rrbot_hardware_interface
+  CATKIN_DEPENDS controller_manager hardware_interface
 )
 
 ###########

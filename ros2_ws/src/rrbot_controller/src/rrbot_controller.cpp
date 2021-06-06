@@ -15,14 +15,13 @@
 #include "rrbot_controller/rrbot_controller.hpp"
 
 #include <limits>
+#include <memory>
 #include <string>
 #include <vector>
 
 namespace rrbot_controller
 {
-RRBotController::RRBotController() : controller_interface::ControllerInterface()
-{
-}
+RRBotController::RRBotController() : controller_interface::ControllerInterface() {}
 
 controller_interface::return_type RRBotController::init(const std::string & controller_name)
 {
@@ -52,21 +51,21 @@ CallbackReturn RRBotController::on_configure(const rclcpp_lifecycle::State & /*p
     return false;
   };
 
-  auto get_string_array_param_and_error_if_empty = [&](std::vector<std::string> & parameter,
-                                                       const char * parameter_name) {
-    parameter = get_node()->get_parameter(parameter_name).as_string_array();
-    return error_if_empty(parameter, parameter_name);
-  };
+  auto get_string_array_param_and_error_if_empty =
+    [&](std::vector<std::string> & parameter, const char * parameter_name) {
+      parameter = get_node()->get_parameter(parameter_name).as_string_array();
+      return error_if_empty(parameter, parameter_name);
+    };
 
-  auto get_string_param_and_error_if_empty = [&](std::string & parameter,
-                                                 const char * parameter_name) {
-    parameter = get_node()->get_parameter(parameter_name).as_string();
-    return error_if_empty(parameter, parameter_name);
-  };
+  auto get_string_param_and_error_if_empty =
+    [&](std::string & parameter, const char * parameter_name) {
+      parameter = get_node()->get_parameter(parameter_name).as_string();
+      return error_if_empty(parameter, parameter_name);
+    };
 
-  if (get_string_array_param_and_error_if_empty(joint_names_, "joints") ||
-      get_string_param_and_error_if_empty(interface_name_, "interface_name"))
-  {
+  if (
+    get_string_array_param_and_error_if_empty(joint_names_, "joints") ||
+    get_string_param_and_error_if_empty(interface_name_, "interface_name")) {
     return CallbackReturn::ERROR;
   }
 
@@ -75,20 +74,20 @@ CallbackReturn RRBotController::on_configure(const rclcpp_lifecycle::State & /*p
     if (msg->joint_names.size() == joint_names_.size()) {
       input_command_.writeFromNonRT(msg);
     } else {
-      RCLCPP_ERROR(get_node()->get_logger(),
-                   "Received %zu , but expected %zu joints in command. Ignoring message.",
-                   msg->joint_names.size(), joint_names_.size());
+      RCLCPP_ERROR(
+        get_node()->get_logger(),
+        "Received %zu , but expected %zu joints in command. Ignoring message.",
+        msg->joint_names.size(), joint_names_.size());
     }
   };
   command_subscriber_ = get_node()->create_subscription<ControllerCommandMsg>(
-      "~/commands", rclcpp::SystemDefaultsQoS(), callback_command);
+    "~/commands", rclcpp::SystemDefaultsQoS(), callback_command);
 
   // State publisher
   s_publisher_ =
-      get_node()->create_publisher<ControllerStateMsg>("~/state", rclcpp::SystemDefaultsQoS());
+    get_node()->create_publisher<ControllerStateMsg>("~/state", rclcpp::SystemDefaultsQoS());
   state_publisher_ = std::make_unique<ControllerStatePublisher>(s_publisher_);
 
-  // TODO(anyone): Reserve memory in state publisher depending on the message type
   state_publisher_->lock();
   state_publisher_->msg_.header.frame_id = joint_names_[0];
   state_publisher_->unlock();
@@ -97,7 +96,8 @@ CallbackReturn RRBotController::on_configure(const rclcpp_lifecycle::State & /*p
   return CallbackReturn::SUCCESS;
 }
 
-controller_interface::InterfaceConfiguration RRBotController::command_interface_configuration() const
+controller_interface::InterfaceConfiguration RRBotController::command_interface_configuration()
+  const
 {
   controller_interface::InterfaceConfiguration command_interfaces_config;
   command_interfaces_config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
@@ -126,16 +126,15 @@ controller_interface::InterfaceConfiguration RRBotController::state_interface_co
 // Fill ordered_interfaces with references to the matching interfaces
 // in the same order as in joint_names
 template <typename T>
-bool get_ordered_interfaces(std::vector<T> & unordered_interfaces,
-                            const std::vector<std::string> & joint_names,
-                            const std::string & interface_type,
-                            std::vector<std::reference_wrapper<T>> & ordered_interfaces)
+bool get_ordered_interfaces(
+  std::vector<T> & unordered_interfaces, const std::vector<std::string> & joint_names,
+  const std::string & interface_type, std::vector<std::reference_wrapper<T>> & ordered_interfaces)
 {
   for (const auto & joint_name : joint_names) {
     for (auto & command_interface : unordered_interfaces) {
-      if ((command_interface.get_name() == joint_name) &&
-          (command_interface.get_interface_name() == interface_type))
-      {
+      if (
+        (command_interface.get_name() == joint_name) &&
+        (command_interface.get_interface_name() == interface_type)) {
         ordered_interfaces.push_back(std::ref(command_interface));
       }
     }
