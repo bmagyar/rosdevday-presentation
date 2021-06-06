@@ -2,10 +2,12 @@
 <package format="2">
   <name>rrbot_bringup</name>
   <version>0.0.1</version>
+
   <description>Bringup files for exemplary RRBot robot and scenarios with it.</description>
 
   <maintainer email="bence.magyar.robotics@gmail.com">Bence Magyar</maintainer>
   <maintainer email="denis@stogl.de">Denis Štogl</maintainer>
+
   <license>Apache License 2.0</license>
 
   <buildtool_depend>catkin</buildtool_depend>

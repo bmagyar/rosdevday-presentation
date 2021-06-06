@@ -2,10 +2,12 @@
 <package format="2">
   <name>rrbot_description</name>
   <version>0.0.1</version>
+
   <description>Description files for the exemplary RRBot robot.</description>
 
   <maintainer email="bence.magyar.robotics@gmail.com">Bence Magyar</maintainer>
   <maintainer email="denis@stogl.de">Denis Štogl</maintainer>
+
   <license>Apache License 2.0</license>
 
   <buildtool_depend>catkin</buildtool_depend>

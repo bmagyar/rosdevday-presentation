@@ -125,8 +125,6 @@ controller_interface::InterfaceConfiguration RRBotController::state_interface_co
 
 // Fill ordered_interfaces with references to the matching interfaces
 // in the same order as in joint_names
-// TODO(anyone): use the method from controller_interface/helpers.hpp when ros2_contol#370
-// is merged
 template <typename T>
 bool get_ordered_interfaces(std::vector<T> & unordered_interfaces,
                             const std::vector<std::string> & joint_names,

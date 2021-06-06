@@ -30,6 +30,7 @@ bool RRBotHardwareInterface::init(ros::NodeHandle & /*root_nh*/, ros::NodeHandle
   }
 
   size_t num_joints = joint_names_.size();
+  ROS_INFO_NAMED("RRBotHardwareInterface", "Found %zu joints.", num_joints);
 
   hw_position_states_.resize(num_joints, std::numeric_limits<double>::quiet_NaN());
   hw_position_commands_.resize(num_joints, std::numeric_limits<double>::quiet_NaN());
@@ -53,6 +54,15 @@ bool RRBotHardwareInterface::init(ros::NodeHandle & /*root_nh*/, ros::NodeHandle
   registerInterface(&joint_state_interface_);
   registerInterface(&position_command_interface_);
 
+  // stat execution on hardware
+  ROS_INFO_NAMED("RRBotHardwareInterface", "Starting...");
+
+  // in this simple example reset state to initial positions
+  for (size_t i = 0; i < num_joints; ++i){
+    hw_position_states_[i] = 0.0; // INITIAL POSITION is ZERO
+    hw_position_commands_[i] = hw_position_states_[i];
+  }
+
   return true;
 }
 
@@ -63,7 +73,7 @@ bool RRBotHardwareInterface::read(
   ROS_INFO_NAMED("RRBotHardwareInterface", "Reading...");
 
   // write command to hardware, in this example do mirror command to states
-  for (size_t i = 0; hw_position_states_.size(); ++i) {
+  for (size_t i = 0; i < hw_position_states_.size(); ++i) {
     ROS_INFO_NAMED("RRBotHardwareInterface",
                    "Got state %.2f for joint %zu!", hw_position_states_[i], i);
   }
@@ -75,7 +85,8 @@ bool RRBotHardwareInterface::write(const ros::Time time, const ros::Duration per
 {
   // write command to hardware, in this example do mirror command to states
   for (size_t i = 0; i < hw_position_commands_.size(); ++i) {
-    hw_position_states_[i] = hw_position_commands_[i];
+    hw_position_states_[i] = hw_position_states_[i] +
+                             (hw_position_commands_[i] - hw_position_states_[i]) / 100.0;
   }
 
   return true;

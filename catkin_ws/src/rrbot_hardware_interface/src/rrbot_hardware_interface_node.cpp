@@ -39,7 +39,7 @@ int main(int argc, char** argv)
 
   rrbot_hardware_interface.init(root_nh, robot_nh);
 
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(100);
 
   while(ros::ok())
   {

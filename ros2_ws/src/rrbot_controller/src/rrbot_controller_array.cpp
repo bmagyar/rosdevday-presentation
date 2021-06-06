@@ -84,7 +84,6 @@ CallbackReturn RRBotControllerArray::on_configure(const rclcpp_lifecycle::State 
       get_node()->create_publisher<ControllerStateMsg>("~/state", rclcpp::SystemDefaultsQoS());
   state_publisher_ = std::make_unique<ControllerStatePublisher>(s_publisher_);
 
-  // TODO(anyone): Reserve memory in state publisher depending on the message type
   state_publisher_->lock();
   state_publisher_->msg_.header.frame_id = joint_names_[0];
   state_publisher_->unlock();

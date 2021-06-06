@@ -20,7 +20,7 @@
 #include "ros2_control_test_assets/components_urdfs.hpp"
 #include "ros2_control_test_assets/descriptions.hpp"
 
-class TestRrbotHardwareInterface : public ::testing::Test
+class TestRRBotHardwareInterface : public ::testing::Test
 {
 protected:
   void SetUp() override
@@ -49,7 +49,7 @@ protected:
   std::string rrbot_hardware_interface_2dof_;
 };
 
-TEST_F(TestRrbotHardwareInterface, load_rrbot_hardware_interface_2dof)
+TEST_F(TestRRBotHardwareInterface, load_rrbot_hardware_interface_2dof)
 {
   auto urdf =
     ros2_control_test_assets::urdf_head + rrbot_hardware_interface_2dof_ +

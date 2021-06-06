@@ -17,7 +17,7 @@
 
 <launch>
 
-  <arg name="controller_to_spawn" default="forward_position_controller" />
+  <arg name="controller_to_spawn" default="" />
   <arg name="controllers_yaml" default="rrbot_controllers" />
 
   <param name="robot_description" command="$(find xacro)/xacro '$(find rrbot_description)/urdf/rrbot_robot.urdf.xacro'" />

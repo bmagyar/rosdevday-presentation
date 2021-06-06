@@ -18,7 +18,7 @@
 <launch>
 
   <arg name="controller_to_spawn" default="rrbot_controller" />
-  <arg name="controllers_yaml" default="rrbot_controllers_custom" />
+  <arg name="controllers_yaml" default="rrbot_controllers_array" />
 
   <include file="$(find rrbot_bringup)/launch/rrbot.launch" >
     <arg name="controller_to_spawn" value="$(arg controller_to_spawn)" />
