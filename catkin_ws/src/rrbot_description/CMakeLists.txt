@@ -8,10 +8,6 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 )
 
-###########
-## Build ##
-###########
-
 #############
 ## Install ##
 #############

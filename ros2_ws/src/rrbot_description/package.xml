@@ -3,9 +3,12 @@
 <package format="3">
   <name>rrbot_description</name>
   <version>0.0.0</version>
+
   <description>Description files for the exemplary RRBot robot.</description>
+
   <maintainer email="bence.magyar.robotics@gmail.com">Bence Magyar</maintainer>
   <maintainer email="denis@stogl.de">Denis Štogl</maintainer>
+
   <license>Apache License 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
