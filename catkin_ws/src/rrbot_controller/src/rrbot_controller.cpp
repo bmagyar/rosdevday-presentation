@@ -12,7 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <rrbot_controller/rrbot_controller.hpp>
+#include "rrbot_controller/rrbot_controller.hpp"
+
+#include <string>
+#include <vector>
 
 namespace rrbot_controller
 {
@@ -24,7 +27,7 @@ bool RRBotController::init(hardware_interface::PositionJointInterface * hw, ros:
   if(!nh.getParam(param_name, joint_names_))
   {
     ROS_ERROR_STREAM_NAMED("RRBotController",
-                            "Failed to getParam '" << param_name <<"' (namespace: " << nh.getNamespace() << ").");
+      "Failed to getParam '" << param_name <<"' (namespace: " << nh.getNamespace() << ").");
     return false;
   }
   size_t num_joints = joint_names_.size();
@@ -33,7 +36,7 @@ bool RRBotController::init(hardware_interface::PositionJointInterface * hw, ros:
     ROS_ERROR_STREAM_NAMED("RRBotController", "List of joint names is empty.");
     return false;
   }
-  for(size_t i = 0; i<num_joints; ++i)
+  for(size_t i = 0; i < num_joints; ++i)
   {
     try
     {
@@ -55,7 +58,8 @@ bool RRBotController::init(hardware_interface::PositionJointInterface * hw, ros:
 
   commands_buffer_.writeFromNonRT(std::vector<double>(num_joints, 0.0));
 
-  command_subscriber_ = nh.subscribe<ControllerCommandMsg>("command", 1, &RRBotController::commandCB, this);
+  command_subscriber_ = nh.subscribe<ControllerCommandMsg>(
+    "command", 1, &RRBotController::commandCB, this);
   return true;
 }
 
@@ -98,6 +102,6 @@ void RRBotController::commandCB(const ControllerCommandMsg::ConstPtr & msg)
 
 }  // namespace rrbot_controller
 
-#include <pluginlib/class_list_macros.hpp>
+#include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(rrbot_controller::RRBotController, controller_interface::ControllerBase)

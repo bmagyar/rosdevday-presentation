@@ -37,7 +37,7 @@ bool RRBotHardwareInterface::init(ros::NodeHandle & /*root_nh*/, ros::NodeHandle
   hw_velocity_states_.resize(num_joints, std::numeric_limits<double>::quiet_NaN());
   hw_effort_states_.resize(num_joints, std::numeric_limits<double>::quiet_NaN());
 
-  //Create ros_control interfaces
+  // Create ros_control interfaces
   for (size_t i = 0; i < num_joints; ++i)
   {
     // Create joint state interface for all joints
@@ -59,7 +59,7 @@ bool RRBotHardwareInterface::init(ros::NodeHandle & /*root_nh*/, ros::NodeHandle
 
   // in this simple example reset state to initial positions
   for (size_t i = 0; i < num_joints; ++i){
-    hw_position_states_[i] = 0.0; // INITIAL POSITION is ZERO
+    hw_position_states_[i] = 0.0;  // INITIAL POSITION is ZERO
     hw_position_commands_[i] = hw_position_states_[i];
   }
 

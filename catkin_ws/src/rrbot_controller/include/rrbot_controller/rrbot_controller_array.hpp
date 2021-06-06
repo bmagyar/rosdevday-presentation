@@ -15,17 +15,18 @@
 #ifndef RRBOT_CONTROLLER__RRBOT_CONTROLLER_ARRAY_HPP_
 #define RRBOT_CONTROLLER__RRBOT_CONTROLLER_ARRAY_HPP_
 
+#include <memory>
 #include <string>
 #include <vector>
 
-#include <hardware_interface/joint_command_interface.h>
-#include <controller_interface/controller.h>
-#include <realtime_tools/realtime_buffer.h>
-#include <realtime_tools/realtime_publisher.h>
-#include <ros/node_handle.h>
+#include "hardware_interface/joint_command_interface.h"
+#include "controller_interface/controller.h"
+#include "realtime_tools/realtime_buffer.h"
+#include "realtime_tools/realtime_publisher.h"
+#include "ros/node_handle.h"
 
-#include <control_msgs/JointControllerState.h>
-#include <std_msgs/Float64MultiArray.h>
+#include "control_msgs/JointControllerState.h"
+#include "control_msgs/JointJog.h"
 
 namespace rrbot_controller
 {

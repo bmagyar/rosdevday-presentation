@@ -40,11 +40,10 @@ hardware_interface::return_type RRBotHardwareInterface::configure(
 std::vector<hardware_interface::StateInterface> RRBotHardwareInterface::export_state_interfaces()
 {
   std::vector<hardware_interface::StateInterface> state_interfaces;
-  for (size_t i = 0; i < info_.joints.size(); ++i){
-    state_interfaces.emplace_back(
-      hardware_interface::StateInterface(
-        // TODO(anyone): insert correct interfaces
-        info_.joints[i].name, hardware_interface::HW_IF_POSITION, &hw_states_[i]));
+  for (size_t i = 0; i < info_.joints.size(); ++i) {
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+      // TODO(anyone): insert correct interfaces
+      info_.joints[i].name, hardware_interface::HW_IF_POSITION, &hw_states_[i]));
   }
 
   return state_interfaces;
@@ -54,11 +53,10 @@ std::vector<hardware_interface::CommandInterface>
 RRBotHardwareInterface::export_command_interfaces()
 {
   std::vector<hardware_interface::CommandInterface> command_interfaces;
-  for (size_t i = 0; i < info_.joints.size(); ++i){
-    command_interfaces.emplace_back(
-      hardware_interface::CommandInterface(
-        // TODO(anyone): insert correct interfaces
-        info_.joints[i].name, hardware_interface::HW_IF_POSITION, &hw_commands_[i]));
+  for (size_t i = 0; i < info_.joints.size(); ++i) {
+    command_interfaces.emplace_back(hardware_interface::CommandInterface(
+      // TODO(anyone): insert correct interfaces
+      info_.joints[i].name, hardware_interface::HW_IF_POSITION, &hw_commands_[i]));
   }
 
   return command_interfaces;
@@ -70,8 +68,8 @@ hardware_interface::return_type RRBotHardwareInterface::start()
   RCLCPP_INFO(rclcpp::get_logger("RRBotHardwareInterface"), "Starting...");
 
   // in this simple example reset state to initial positions
-  for (size_t i = 0; i < info_.joints.size(); ++i){
-    hw_states_[i] = 0.0; // INITIAL POSITION is ZERO
+  for (size_t i = 0; i < info_.joints.size(); ++i) {
+    hw_states_[i] = 0.0;  // INITIAL POSITION is ZERO
     hw_commands_[i] = hw_states_[i];
   }
 
@@ -96,10 +94,10 @@ hardware_interface::return_type RRBotHardwareInterface::read()
   RCLCPP_INFO(rclcpp::get_logger("RRBotHardwareInterface"), "Reading...");
 
   // write command to hardware, in this example do mirror command to states
-  for (size_t i = 0; i < hw_states_.size(); ++i){
+  for (size_t i = 0; i < hw_states_.size(); ++i) {
     RCLCPP_INFO(
-      rclcpp::get_logger("RRBotHardwareInterface"),
-      "Got state %.2f for joint %d!", hw_states_[i], i);
+      rclcpp::get_logger("RRBotHardwareInterface"), "Got state %.2f for joint %d!", hw_states_[i],
+      i);
   }
 
   return hardware_interface::return_type::OK;
@@ -108,7 +106,7 @@ hardware_interface::return_type RRBotHardwareInterface::read()
 hardware_interface::return_type RRBotHardwareInterface::write()
 {
   // write command to hardware, in this example do mirror command to states
-  for (size_t i = 0; i < hw_commands_.size(); ++i){
+  for (size_t i = 0; i < hw_commands_.size(); ++i) {
     hw_states_[i] = hw_states_[i] + (hw_commands_[i] - hw_states_[i]) / 100.0;
   }
 
@@ -120,5 +118,4 @@ hardware_interface::return_type RRBotHardwareInterface::write()
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-  rrbot_hardware_interface::RRBotHardwareInterface, hardware_interface::SystemInterface
-)
+  rrbot_hardware_interface::RRBotHardwareInterface, hardware_interface::SystemInterface)

@@ -18,22 +18,22 @@
 #include <string>
 #include <vector>
 
-#include "rrbot_hardware_interface/visibility_control.h"
-#include "hardware_interface/system_interface.hpp"
 #include "hardware_interface/base_interface.hpp"
 #include "hardware_interface/handle.hpp"
 #include "hardware_interface/hardware_info.hpp"
+#include "hardware_interface/system_interface.hpp"
 #include "hardware_interface/types/hardware_interface_return_values.hpp"
 #include "hardware_interface/types/hardware_interface_status_values.hpp"
 #include "rclcpp/macros.hpp"
+#include "rrbot_hardware_interface/visibility_control.h"
 
 namespace rrbot_hardware_interface
 {
 class RRBotHardwareInterface
-  : public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
+: public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
 {
 public:
-  RCLCPP_SHARED_PTR_DEFINITIONS(RRBotHardwareInterface)
+  RCLCPP_SHARED_PTR_DEFINITIONS(RRBotHardwareInterface);
 
   RRBOT_HARDWARE_INTERFACE_PUBLIC
   hardware_interface::return_type configure(const hardware_interface::HardwareInfo & info) override;

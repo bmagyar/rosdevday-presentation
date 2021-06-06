@@ -12,12 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <rrbot_controller/rrbot_controller_array.hpp>
+#include "rrbot_controller/rrbot_controller_array.hpp"
+
+#include <string>
+#include <vector>
 
 namespace rrbot_controller
 {
 
-bool RRBotControllerArray::init(hardware_interface::PositionJointInterface * hw, ros::NodeHandle & nh)
+bool RRBotControllerArray::init(
+  hardware_interface::PositionJointInterface * hw, ros::NodeHandle & nh)
 {
   // List of controlled joints
   std::string param_name = "joints";
@@ -33,7 +37,7 @@ bool RRBotControllerArray::init(hardware_interface::PositionJointInterface * hw,
     ROS_ERROR_STREAM_NAMED("RRBotControllerArray", "List of joint names is empty.");
     return false;
   }
-  for(size_t i = 0; i<num_joints; ++i)
+  for(size_t i = 0; i < num_joints; ++i)
   {
     try
     {
@@ -55,7 +59,8 @@ bool RRBotControllerArray::init(hardware_interface::PositionJointInterface * hw,
 
   commands_buffer_.writeFromNonRT(std::vector<double>(num_joints, 0.0));
 
-  command_subscriber_ = nh.subscribe<ControllerCommandMsg>("command", 1, &RRBotControllerArray::commandCB, this);
+  command_subscriber_ = nh.subscribe<ControllerCommandMsg>(
+    "command", 1, &RRBotControllerArray::commandCB, this);
   return true;
 }
 
@@ -98,6 +103,6 @@ void RRBotControllerArray::commandCB(const ControllerCommandMsg::ConstPtr & msg)
 
 }  // namespace rrbot_controller
 
-#include <pluginlib/class_list_macros.hpp>
+#include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(rrbot_controller::RRBotControllerArray, controller_interface::ControllerBase)

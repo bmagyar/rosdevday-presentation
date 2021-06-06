@@ -13,19 +13,19 @@
 # limitations under the License.
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
+from launch.substitutions import ThisLaunchFileDir
 
 
 def generate_launch_description():
 
     base_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/rrbot.launch.py']),
-        launch_arguments={'controllers_file': 'rrbot_controllers_array.yaml',
-                          'robot_controller': 'rrbot_controller',
-                          }.items())
-
-    return LaunchDescription(
-        [base_launch]
+        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/rrbot.launch.py"]),
+        launch_arguments={
+            "controllers_file": "rrbot_controllers_array.yaml",
+            "robot_controller": "rrbot_controller",
+        }.items(),
     )
+
+    return LaunchDescription([base_launch])

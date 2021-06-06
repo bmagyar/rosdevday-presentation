@@ -15,15 +15,16 @@
 #ifndef RRBOT_CONTROLLER__RRBOT_CONTROLLER_HPP_
 #define RRBOT_CONTROLLER__RRBOT_CONTROLLER_HPP_
 
+#include <memory>
 #include <string>
 #include <vector>
 
-#include "rrbot_controller/visibility_control.h"
 #include "controller_interface/controller_interface.hpp"
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 #include "rclcpp_lifecycle/state.hpp"
 #include "realtime_tools/realtime_buffer.h"
 #include "realtime_tools/realtime_publisher.h"
+#include "rrbot_controller/visibility_control.h"
 
 #include "control_msgs/msg/joint_controller_state.hpp"
 #include "control_msgs/msg/joint_jog.hpp"
