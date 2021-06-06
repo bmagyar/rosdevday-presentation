@@ -25,7 +25,6 @@ class TestRRBotHardwareInterface : public ::testing::Test
 protected:
   void SetUp() override
   {
-    // TODO(anyone): Extend this description to your robot
     rrbot_hardware_interface_2dof_ =
       R"(
   <ros2_control name="RRBotHardwareInterface2dof" type="system">

@@ -31,11 +31,9 @@
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 #include "rrbot_controller/rrbot_controller.hpp"
 
-// TODO(anyone): Replace with controller specific messages
 #include "control_msgs/msg/joint_controller_state.hpp"
 #include "control_msgs/msg/joint_jog.hpp"
 
-// TODO(anyone): replace the state and command message types
 using ControllerStateMsg = control_msgs::msg::JointControllerState;
 using ControllerCommandMsg = control_msgs::msg::JointJog;
 
@@ -131,7 +129,6 @@ protected:
         joint_names_[i], interface_name_, &joint_command_values_[i]));
       command_ifs.emplace_back(command_itfs_.back());
     }
-    // TODO(anyone): Add other command interfaces, if any
 
     std::vector<hardware_interface::LoanedStateInterface> state_ifs;
     state_itfs_.reserve(joint_state_values_.size());
@@ -142,7 +139,6 @@ protected:
         joint_names_[i], interface_name_, &joint_state_values_[i]));
       state_ifs.emplace_back(state_itfs_.back());
     }
-    // TODO(anyone): Add other state interfaces, if any
 
     controller_->assign_interfaces(std::move(command_ifs), std::move(state_ifs));
 
@@ -198,8 +194,6 @@ protected:
   }
 
 protected:
-  // TODO(anyone): adjust the members as needed
-
   // Controller-related parameters
   const std::vector<std::string> joint_names_ = {"joint1"};
   const std::string interface_name_ = "my_interface";

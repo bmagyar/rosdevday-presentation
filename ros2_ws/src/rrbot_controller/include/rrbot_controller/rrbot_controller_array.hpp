@@ -26,7 +26,6 @@
 #include "realtime_tools/realtime_publisher.h"
 #include "rrbot_controller/visibility_control.h"
 
-// TODO(anyone): Replace with controller specific messages
 #include "control_msgs/msg/joint_controller_state.hpp"
 #include "example_interfaces/msg/float64_multi_array.hpp"
 
