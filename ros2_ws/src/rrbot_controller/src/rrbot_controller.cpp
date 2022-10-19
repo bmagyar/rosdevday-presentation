@@ -110,19 +110,6 @@ controller_interface::InterfaceConfiguration RRBotController::command_interface_
   return command_interfaces_config;
 }
 
-controller_interface::InterfaceConfiguration RRBotController::state_interface_configuration() const
-{
-  controller_interface::InterfaceConfiguration state_interfaces_config;
-  state_interfaces_config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
-
-  state_interfaces_config.names.reserve(joint_names_.size());
-  for (const auto & joint : joint_names_) {
-    state_interfaces_config.names.push_back(joint + "/" + interface_name_);
-  }
-
-  return state_interfaces_config;
-}
-
 // Fill ordered_interfaces with references to the matching interfaces
 // in the same order as in joint_names
 template <typename T>
